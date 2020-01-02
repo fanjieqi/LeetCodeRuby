@@ -8,12 +8,12 @@ def contains_nearby_duplicate(nums, k)
     hash[num] << i
   end
 
-  ready = nums.group_by(&:itself).select {|k, v| v.count > 1}.map(&:first)
-  ready.any? do |num|
-    hash[num].any? do |i|
-      hash[num].any? do |j|
-        i != j && (i - j).abs <= k
-      end
+  hash.transform_values(&:sort)
+  hash.each do |num, v|
+    next if v.count <= 1
+    (1..v.length-1).each do |i|
+      return true if (v[i-1] - v[i]).abs <= k
     end
   end
+  false
 end
