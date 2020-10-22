@@ -1,0 +1,10 @@
+# @param {Integer} n
+# @return {Integer}
+def minimum_one_bit_operations(n)
+  n ^= n >> 16
+  n ^= n >>  8
+  n ^= n >>  4
+  n ^= n >>  2
+  n ^= n >>  1
+  n
+end
